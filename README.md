@@ -1,67 +1,100 @@
-# AI-Based Lead Scoring System
+# Lead Scoring System
 
-This is a Python-based lead scoring system that uses machine learning to predict the likelihood of lead conversion and assign priority scores.
+A machine learning-based lead scoring system that predicts the likelihood of lead conversion.
 
 ## Features
 
-- Machine learning-based lead scoring using Random Forest Classifier
-- Simple web interface for lead scoring
-- Priority classification (Hot, Warm, Cold)
-- Conversion probability prediction
-- Sample data included for demonstration
+- Lead scoring based on multiple factors
+- MongoDB database integration
+- Real-time scoring
+- Lead management and tracking
+- Priority-based sorting
+
+## Prerequisites
+
+- Python 3.8 or higher
+- MongoDB
+- pip (Python package manager)
 
 ## Installation
 
-1. Clone this repository
-2. Install the required dependencies:
+1. Clone the repository:
+```bash
+git clone <your-repository-url>
+cd lead-scoring-system
+```
+
+2. Create and activate a virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+3. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-## Usage
+4. Install MongoDB:
+```bash
+# On Ubuntu/Debian
+sudo apt-get update
+sudo apt-get install -y mongodb
 
-1. Start the Flask application:
+# On macOS
+brew install mongodb
+
+# On Windows
+# Download and install from https://www.mongodb.com/try/download/community
+```
+
+5. Start MongoDB:
+```bash
+# On Ubuntu/Debian
+sudo service mongodb start
+
+# On macOS
+brew services start mongodb
+
+# On Windows
+# MongoDB should start automatically after installation
+```
+
+## Running the Application
+
+1. Initialize the MongoDB database:
+```bash
+python init_mongodb.py  // It will create database and collection and all also I have given 3 data entries to check, then it whichever leads you add will be store in the collection.
+```
+
+2. Start the Flask application:
 ```bash
 python app.py
 ```
 
-2. Open your web browser and navigate to `http://localhost:5000`
+3. Open your browser and navigate to:
+```
+http://localhost:5000
+```
 
-3. Fill in the lead information form:
-   - Lead Source (Facebook, Google Ads, Website, Referral)
-   - Response Time (in hours)
-   - Interaction Count
-   - Budget
-   - Job Title
-   - Location
+## Project Structure
 
-4. Click "Score Lead" to get the prediction
+- `app.py` - Main Flask application
+- `lead_scorer.py` - Lead scoring model
+- `mongo_operations.py` - MongoDB operations
+- `init_mongodb.py` - Database initialization
+- `templates/` - HTML templates
+- `static/` - Static files (CSS, JS)
 
-## How It Works
+## Usage
 
-The system uses a Random Forest Classifier to predict lead conversion probability based on:
-- Lead source
-- Response time
-- Interaction count
-- Budget
-- Job title
-- Location
+1. Fill in the lead details in the form
+2. Click "Score Lead" to get the lead score
+3. View all leads in the table below
+4. Leads are automatically sorted by score
 
-The model is trained on sample data and assigns:
-- A score (0-100)
-- Priority level (Hot, Warm, Cold)
-- Conversion probability
+## Notes
 
-## Files Structure
-
-- `app.py`: Flask web application
-- `lead_scorer.py`: Core lead scoring logic and ML model
-- `sample_data.json`: Sample lead data for training
-- `templates/index.html`: Web interface
-- `requirements.txt`: Python dependencies
-
-## Customization
-
-You can modify the sample data in `sample_data.json` to include your own lead data. The model will automatically retrain when the application starts.
-
-To adjust the priority thresholds, modify the `predict_score` method in `lead_scorer.py`. 
+- The system uses a pre-trained model based on sample data
+- New leads are stored in MongoDB
+- The application runs on port 5000 by default 
